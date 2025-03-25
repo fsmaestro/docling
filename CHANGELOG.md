@@ -1,3 +1,15 @@
+## [v2.28.1](https://github.com/docling-project/docling/releases/tag/v2.28.1) - 2025-03-25
+
+### Fix
+
+* **converter:** Cache same pipeline class with different options ([#1152](https://github.com/docling-project/docling/issues/1152)) ([`825b226`](https://github.com/docling-project/docling/commit/825b226fab0acabf2920f1af33c048675e8b0139))
+* **debug:** Missing translation of bbox to to_bounding_box ([#1220](https://github.com/docling-project/docling/issues/1220)) ([`6df8827`](https://github.com/docling-project/docling/commit/6df882723112f9ddc22a5ace4048e1d5acb30737))
+* **docx:** Identifying numbered headers ([#1231](https://github.com/docling-project/docling/issues/1231)) ([`f739d0e`](https://github.com/docling-project/docling/commit/f739d0e4c5a29046587e3c348eff7fdd30262d44))
+
+### Documentation
+
+* **examples:** Batch conversion doc `raises_on_error` ([#1147](https://github.com/docling-project/docling/issues/1147)) ([`0974ba4`](https://github.com/docling-project/docling/commit/0974ba4e1ca165f9916d17861491f482e33909ca))
+
 ## [v2.28.0](https://github.com/docling-project/docling/releases/tag/v2.28.0) - 2025-03-19
 
 ### Feature
