@@ -133,6 +133,10 @@ This chapter describes how you can secure and protect data in DB2 for i. The fol
 - GLYPH&lt;SM590000&gt; Current state of IBM i security
 - GLYPH&lt;SM590000&gt; DB2 for i security controls
 
+$^{1 }$http://www.idtheftcenter.org
+
+$^{2 }$http://www.ponemon.org /
+
 ## 1.1 Security fundamentals
 
 Before reviewing database security techniques, there are two fundamental steps in securing information assets that must be described:
@@ -195,6 +199,8 @@ Table 2-1 FUNCTION\_USAGE view
 
 To discover who has authorization to define and manage RCAC, you can use the query that is shown in Example 2-1.
 
+Example 2-1 Query to determine who has authority to define and manage RCAC
+
 SELECT
 
 function\_id,
@@ -250,6 +256,8 @@ Table 2-2 Comparison of the different function usage IDs and *JOBCTL authority
 | MODIFY PLAN CACHE PROPERTIES procedure (currently does not check authority)    | X         |                  | X                |                  |                |
 | CHANGE PLAN CACHE SIZE procedure (currently does not check authority)          | X         |                  | X                |                  |                |
 
+The SQL CREATE PERMISSION statement that is shown in Figure 3-1 is used to define and initially enable or disable the row access rules.
+
 Figure 3-1 CREATE PERMISSION SQL statement
 
 <!-- image -->
@@ -257,6 +265,8 @@ Figure 3-1 CREATE PERMISSION SQL statement
 ## Column mask
 
 A column mask is a database object that manifests a column value access control rule for a specific column in a specific table. It uses a CASE expression that describes what you see when you access the column. For example, a teller can see only the last four digits of a tax identification number.
+
+Table 3-1 summarizes these special registers and their values.
 
 Table 3-1 Special registers and their corresponding values
 
@@ -334,6 +344,8 @@ WHEN VERIFY_GROUP_FOR_USER ( SESSION_USER , 'HR', 'EMP' ) = 1 THEN EMPLOYEES . D
 ```
 CREATE MASK HR_SCHEMA.MASK_TAX_ID_ON_EMPLOYEES ON HR_SCHEMA.EMPLOYEES AS EMPLOYEES FOR COLUMN TAX_ID RETURN CASE WHEN VERIFY_GROUP_FOR_USER ( SESSION_USER , 'HR' ) = 1 THEN EMPLOYEES . TAX_ID WHEN VERIFY_GROUP_FOR_USER ( SESSION_USER , 'MGR' ) = 1 AND SESSION_USER = EMPLOYEES . USER_ID THEN EMPLOYEES . TAX_ID WHEN VERIFY_GROUP_FOR_USER ( SESSION_USER , 'MGR' ) = 1 AND SESSION_USER <> EMPLOYEES . USER_ID THEN ( 'XXX-XX-' CONCAT QSYS2 . SUBSTR ( EMPLOYEES . TAX_ID , 8 , 4 ) ) WHEN VERIFY_GROUP_FOR_USER ( SESSION_USER , 'EMP' ) = 1 THEN EMPLOYEES . TAX_ID ELSE 'XXX-XX-XXXX' END ENABLE ;
 ```
+
+Example 3-9 Creating a mask on the TAX\_ID column
 
 - 3. Figure 3-10 shows the masks that are created in the HR\_SCHEMA.
 
