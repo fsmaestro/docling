@@ -1,3 +1,10 @@
+## [v2.28.2](https://github.com/docling-project/docling/releases/tag/v2.28.2) - 2025-03-26
+
+### Fix
+
+* Improve HTML layer detection, various MD fixes ([#1241](https://github.com/docling-project/docling/issues/1241)) ([`9210812`](https://github.com/docling-project/docling/commit/9210812bfaad1fb138194464f0d563788f63f4c2))
+* **html:** Fix HTML parsed heading level ([#1244](https://github.com/docling-project/docling/issues/1244)) ([`85c4df8`](https://github.com/docling-project/docling/commit/85c4df887b4dfc566f38ce25c6cf2824ff092b8e))
+
 ## [v2.28.1](https://github.com/docling-project/docling/releases/tag/v2.28.1) - 2025-03-25
 
 ### Fix
