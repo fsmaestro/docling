@@ -5,7 +5,11 @@ from typing import Iterable, Optional, Union
 
 import numpy
 from docling_core.types.doc import BoundingBox, DocItemLabel, TableCell
-from docling_core.types.doc.page import BoundingRectangle
+from docling_core.types.doc.page import (
+    BoundingRectangle,
+    SegmentedPdfPage,
+    TextCellUnit,
+)
 from docling_ibm_models.tableformer.data_management.tf_predictor import TFPredictor
 from PIL import ImageDraw
 
@@ -218,9 +222,18 @@ class TableStructureModel(BasePageModel):
 
                     if len(table_bboxes):
                         for table_cluster, tbl_box in in_tables:
-
+                            # Check if word-level cells are available from backend:
+                            sp = page._backend.get_segmented_page()
+                            if sp is not None:
+                                tcells = sp.get_cells_in_bbox(
+                                    cell_unit=TextCellUnit.WORD,
+                                    bbox=table_cluster.bbox,
+                                )
+                            else:
+                                # Otherwise - we use normal (line/phrase) cells
+                                tcells = table_cluster.cells
                             tokens = []
-                            for c in table_cluster.cells:
+                            for c in tcells:
                                 # Only allow non empty stings (spaces) into the cells of a table
                                 if len(c.text.strip()) > 0:
                                     new_cell = copy.deepcopy(c)
@@ -229,7 +242,6 @@ class TableStructureModel(BasePageModel):
                                             scale=self.scale
                                         )
                                     )
-
                                     tokens.append(
                                         {
                                             "id": new_cell.index,
