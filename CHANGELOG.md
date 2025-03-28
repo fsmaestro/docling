@@ -1,3 +1,9 @@
+## [v2.28.3](https://github.com/docling-project/docling/releases/tag/v2.28.3) - 2025-03-28
+
+### Fix
+
+* Word-level pdf cells for tables ([#1238](https://github.com/docling-project/docling/issues/1238)) ([`8bd71e8`](https://github.com/docling-project/docling/commit/8bd71e8e331de3a176110341554e026c9e0ecf6c))
+
 ## [v2.28.2](https://github.com/docling-project/docling/releases/tag/v2.28.2) - 2025-03-26
 
 ### Fix
