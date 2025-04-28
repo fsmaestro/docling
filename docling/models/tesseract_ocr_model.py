@@ -151,7 +151,7 @@ class TesseractOcrModel(BaseOcrModel):
                             script = map_tesseract_script(script)
                             lang = f"{self.script_prefix}{script}"
 
-                            # Check if the detected languge is present in the system
+                            # Check if the detected language is present in the system
                             if lang not in self._tesserocr_languages:
                                 msg = f"Tesseract detected the script '{script}' and language '{lang}'."
                                 msg += " However this language is not installed in your system and will be ignored."
